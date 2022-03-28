@@ -8,6 +8,6 @@ https://dnoagain.github.io/tags/%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8/
 https://dnoagain.github.io/tags/%E5%8D%9A%E5%AE%A2/
 https://dnoagain.github.io/tags/Markdown/
 https://dnoagain.github.io/categories/STM32F103/
-https://dnoagain.github.io/categories/STM32F103/%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8/
 https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/
+https://dnoagain.github.io/categories/STM32F103/%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8/
 https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/%E5%86%99%E4%BD%9C/
