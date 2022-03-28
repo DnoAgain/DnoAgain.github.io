@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://dnoagain.github.io/img/posting/%E5%88%9D%E5%A7%8B%E5%8C%96.png">
 <meta property="og:image" content="https://dnoagain.github.io/img/posting/%E4%B8%AD%E6%96%AD%E6%BA%90.png">
 <meta property="article:published_time" content="2022-03-27T07:02:27.000Z">
-<meta property="article:modified_time" content="2022-03-28T11:23:10.841Z">
+<meta property="article:modified_time" content="2022-03-28T12:33:26.104Z">
 <meta property="article:author" content="vv_vda">
 <meta property="article:tag" content="STM32F103">
 <meta property="article:tag" content="通用定时器">
@@ -186,7 +186,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">568字</span>
+        <span class="post-count">1.1k字</span>
       </span>
     </span>
 
@@ -195,7 +195,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -256,8 +256,21 @@
 <h3 id="初始化定时器"><a href="#初始化定时器" class="headerlink" title="初始化定时器"></a>初始化定时器</h3><p><img src="/img/posting/%E5%88%9D%E5%A7%8B%E5%8C%96.png"></p>
 <p>在 HAL 库中，定时器的初始化参数是通过初始化函数<code>HAL_TIM_Base_Init</code> 实现的主要传入</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  TIM_TypeDef                        *Instance;        </span><br><span class="line">  TIM_Base_InitTypeDef               Init;              </span><br><span class="line">  HAL_TIM_ActiveChannel              Channel;         </span><br><span class="line">  DMA_HandleTypeDef                  *hdma[<span class="number">7</span>];                                                                   </span><br><span class="line">&#125; TIM_HandleTypeDef;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">uint32_t</span> Prescaler;                                         </span><br><span class="line">  <span class="type">uint32_t</span> CounterMode;      </span><br><span class="line">  <span class="type">uint32_t</span> Period;            </span><br><span class="line">  <span class="type">uint32_t</span> ClockDivision;                                        </span><br><span class="line">  <span class="type">uint32_t</span> RepetitionCounter;  </span><br><span class="line">  <span class="type">uint32_t</span> AutoReloadPreload;  </span><br><span class="line">&#125; TIM_Base_InitTypeDef;</span><br></pre></td></tr></table></figure>
+<p>定时器初始化范例如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TIM_HandleTypeDef TIM3_Handler; <span class="comment">//定时器句柄</span></span><br><span class="line">TIM3_Handler.Instance=TIM3; <span class="comment">//通用定时器 3</span></span><br><span class="line">TIM3_Handler.Init.Prescaler=<span class="number">7199</span>; <span class="comment">//分频系数</span></span><br><span class="line">TIM3_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;<span class="comment">//向上计数器</span></span><br><span class="line">TIM3_Handler.Init.Period=<span class="number">4999</span>; <span class="comment">//自动装载值</span></span><br><span class="line">TIM3_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;<span class="comment">//时钟分频因子</span></span><br><span class="line">TIM3_Handler.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;<span class="comment">//使能自动重载</span></span><br><span class="line"></span><br><span class="line">HAL_TIM_Base_Init(&amp;TIM3_Handler);</span><br></pre></td></tr></table></figure>
 
-<h3 id="设置中断源"><a href="#设置中断源" class="headerlink" title="设置中断源"></a>设置中断源</h3><p><img src="/img/posting/%E4%B8%AD%E6%96%AD%E6%BA%90.png"><br>该函数中断源为<code>TIM_IT_Update</code> 名为更新时中断</p>
+<h3 id="设置中断源"><a href="#设置中断源" class="headerlink" title="设置中断源"></a>设置中断源</h3><p>HAL库中使能定时器更新中断和使能定时器两个操作可以在函数<code>HAL_TIME_Base_Start_IT()</code>中一次完成的。该函数中断源为<code>TIM_IT_Update</code> 名为更新时中断<br><img src="/img/posting/%E4%B8%AD%E6%96%AD%E6%BA%90.png"></p>
+<h3 id="中断优先级"><a href="#中断优先级" class="headerlink" title="中断优先级"></a>中断优先级</h3><p>在定时器中断使能之后，因为要产生中断，必不可少的要设置 NVIC 的相关寄存器，设置中断优先级。之前多次讲解到中断优先级的设置，这里就不重复讲解。和串口等其他外设一样，HAL 库为定时器初始化定义了回调函数<code>HAL_TIM_Base_MspInit</code>。一般情况下，与<code>MCU</code>有关的使能使能，以及中断优先级配置我们都会放在该回调函数内部。函数声明如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)；</span><br></pre></td></tr></table></figure>
+<p>对于回调函数，这里我们就不做过多讲解，大家只需要重写这个函数即可。</p>
+<h3 id="编写中断服务函数"><a href="#编写中断服务函数" class="headerlink" title="编写中断服务函数"></a>编写中断服务函数</h3><p>一般情况下是在中断服务函数内部编写中断控制逻辑。HAL库定义了共用定时器处理函数<code>HAL_TIMx_IRQHandler</code>。</p>
+<p>而函数<code>HAL_TIM_IRQHandler</code>内部，会对相应的中断标志进行详细判断，判断确定中断来<br>源后，会自动清掉该中断标志位，同时调用不同类型中孤单的回调函数。所以我们的中断控制<br>逻辑只用编写在中断回调函数中，并且中断回调函数中不需要清中断标志位。</p>
+<p>比如定时器更新中断回调函数为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)；</span><br></pre></td></tr></table></figure>
+<p>跟串口中断回调函数一样，我们只需要重写该函数即可。对于其他类型中断，HAL 库同样<br>提供几个不同的回调函数，这里我们列出常用的几个回调函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);//更新中断</span><br><span class="line">void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim);//输出比较</span><br><span class="line">void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);//输入捕获</span><br><span class="line">void HAL_TIM_TriggerCallback(TIM_HandleTypeDef *htim);//触发中断</span><br></pre></td></tr></table></figure>
+
+
 
       
       
@@ -386,7 +399,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">定时器种类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">定时器的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%AD%E6%96%AD%E5%8A%9F%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">利用基本定时器实现中断功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">3.1.</span> <span class="toc-text">基本结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">定时器配置步骤如下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F"><span class="toc-number">3.2.1.</span> <span class="toc-text">时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">3.2.2.</span> <span class="toc-text">初始化定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%AD%E6%BA%90"><span class="toc-number">3.2.3.</span> <span class="toc-text">设置中断源</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">定时器种类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">定时器的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%9F%BA%E6%9C%AC%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%AD%E6%96%AD%E5%8A%9F%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">利用基本定时器实现中断功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">3.1.</span> <span class="toc-text">基本结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">定时器配置步骤如下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F"><span class="toc-number">3.2.1.</span> <span class="toc-text">时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">3.2.2.</span> <span class="toc-text">初始化定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%AD%E6%BA%90"><span class="toc-number">3.2.3.</span> <span class="toc-text">设置中断源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">3.2.4.</span> <span class="toc-text">中断优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%AD%E6%96%AD%E6%9C%8D%E5%8A%A1%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.5.</span> <span class="toc-text">编写中断服务函数</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
