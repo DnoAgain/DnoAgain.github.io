@@ -47,20 +47,6 @@
 
   
   <url>
-    <loc>https://dnoagain.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2022-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://dnoagain.github.io/tags/Markdown/</loc>
-    <lastmod>2022-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://dnoagain.github.io/tags/STM32F103/</loc>
     <lastmod>2022-03-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -74,14 +60,21 @@
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://dnoagain.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+  <url>
+    <loc>https://dnoagain.github.io/tags/Markdown/</loc>
+    <lastmod>2022-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
   
   <url>
     <loc>https://dnoagain.github.io/categories/STM32F103/</loc>
@@ -91,7 +84,7 @@
   </url>
   
   <url>
-    <loc>https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/%E5%86%99%E4%BD%9C/</loc>
+    <loc>https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -99,6 +92,13 @@
   
   <url>
     <loc>https://dnoagain.github.io/categories/STM32F103/%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8/</loc>
+    <lastmod>2022-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://dnoagain.github.io/categories/%E5%8D%9A%E5%AE%A2/%E5%86%99%E4%BD%9C/</loc>
     <lastmod>2022-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
