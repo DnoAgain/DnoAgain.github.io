@@ -6,21 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://DnoAgain.github.io">
-  <title>使用Hexo写博客 | Hexo</title>
+  <title>STM32 GPIO的工作模式 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="尽管 Hexo 支持 MarkDown，但是我们却不能像写单独的 MarkDown 文档时那样肆无忌惮。由于我们所写的文档是需要被解析为静态网页文件的，所以我们必须严格遵从 Hexo 的规范，这样才能解析出条理清晰的静态网页文件。">
+  <meta name="description" content="简介 GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo写博客">
-<meta property="og:url" content="https://dnoagain.github.io/2022/03/24/%E4%BD%BF%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="STM32 GPIO的工作模式">
+<meta property="og:url" content="https://dnoagain.github.io/2022/03/31/STM32-GPIO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="尽管 Hexo 支持 MarkDown，但是我们却不能像写单独的 MarkDown 文档时那样肆无忌惮。由于我们所写的文档是需要被解析为静态网页文件的，所以我们必须严格遵从 Hexo 的规范，这样才能解析出条理清晰的静态网页文件。">
+<meta property="og:description" content="简介 GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-24T02:03:46.000Z">
-<meta property="article:modified_time" content="2022-03-24T02:55:09.539Z">
+<meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp">
+<meta property="og:image" content="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc">
+<meta property="og:image" content="https://114514.site/img/GPIO/IPD.jpg">
+<meta property="og:image" content="https://114514.site/img/GPIO/AIN.jpg">
+<meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911141933151?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142035626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142917813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="article:published_time" content="2022-03-31T01:27:27.000Z">
+<meta property="article:modified_time" content="2022-03-31T08:09:36.371Z">
 <meta property="article:author" content="vv_vda">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="STM32F103">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -159,20 +167,20 @@
             <canvas data-colors="#eaeaea" data-sectionheight="100" data-contentid="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-使用Hexo写博客" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-STM32-GPIO的工作模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      使用Hexo写博客
+      STM32 GPIO的工作模式
     </h1>
   
 
         
-        <a href="/2022/03/24/%E4%BD%BF%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2022-03-24T02:03:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
+        <a href="/2022/03/31/STM32-GPIO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2022-03-31T01:27:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-31</time>
 </a>
         
           <div style="margin-top:10px;">
@@ -180,7 +188,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
+        <span class="post-count">1.3k字</span>
       </span>
     </span>
 
@@ -199,44 +207,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>尽管 Hexo 支持 MarkDown，但是我们却不能像写单独的 MarkDown 文档时那样肆无忌惮。由于我们所写的文档是需要被解析为静态网页文件的，所以我们必须严格遵从 Hexo 的规范，这样才能解析出条理清晰的静态网页文件。</p>
+        <p>简介</p>
+<p>GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。</p>
 <span id="more"></span>
-<h1 id="新建文档"><a href="#新建文档" class="headerlink" title="新建文档"></a>新建文档</h1><p>假设我们的文章名为 “hello hexo markdwon”，在命令行键入以下命令即可：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;hello hexo markdown&quot;</span><br></pre></td></tr></table></figure>
-<p>上述命令的结果是在 <code>./hexo/source/_posts </code>路径下新建了一个 <code>hello-hexo-markdown.md</code> 文件。然后，我们就可以打开编辑器尽情地写作了。</p>
-<h1 id="文档格式"><a href="#文档格式" class="headerlink" title="文档格式"></a>文档格式</h1><p>我们使用文本编辑器打开刚刚新建的<code>hello-hexo-markdown.md</code>文件，会发现其中已经存在内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello hexo markdown</span><br><span class="line">date: 2016-11-16 18:11:25</span><br><span class="line">tags: [tag1,tag2]</span><br><span class="line">categories: [1,2]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>这些内容是干嘛的呢？事实上，他们就是用于设置 MarkDown 文档在被解析为静态网页文件时的相关配置，这些配置参数一般位于文件中最上方以<code>---</code>分隔的区域。</p>
-<p>其中，<code>title</code> 的值是当前文档名，也是将来在网页中显示的文章标题。</p>
-<p><code>date</code> 值是我们新建文档时的当地时区时间。</p>
-<p><code>tags</code> 值是文档的标签，我们可以随意赋值为文档贴标签。其用法如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello hexo markdown</span><br><span class="line">date: 2016-11-16 18:11:25</span><br><span class="line">tags:</span><br><span class="line">- hello</span><br><span class="line">- hexo</span><br><span class="line">- markdown</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>上面的配置参数为这篇文档贴上了 <code>hello</code>、<code>hexo</code>、<code>mardown</code> 标签，如果站点使用的主题支持标签功能，MarkDown 文档被解析为静态网页文件后就可以看到效果。</p>
-<p>除了以上这些，还有很多预先定义的参数 <u>Front-mtter</u>，我们这里选取一个常用且较为典型的配置参数 <code>categories </code>讲解一下。</p>
-<h1 id="文章分类"><a href="#文章分类" class="headerlink" title="文章分类"></a>文章分类</h1><p><code>categories</code> 是用来给文章分类的，它跟 <code>tags</code> 不同的是其具有顺序性和层次性。</p>
-<p>例如，我们写一篇关于 CSS3 动画的文章，我们可能会为其打标签 ”CSS3“、”动画“等，但是我们却会将其分在 CSS&#x2F;CSS3 类别下，这个是有一定的相关性、顺序性和层次性。简单来说，<code>categories</code> 有点儿像新建文件夹对文档进行分门别类的归置。</p>
-<p><code>categories</code> 的用法同 <code>tags</code> 一样，只不过斗个 <code>categories</code> 值是分先后顺序的。</p>
-<h1 id="引用资源"><a href="#引用资源" class="headerlink" title="引用资源"></a>引用资源</h1><p>写个博客，有时候我们会想添加个图片啦 O.O，或者其他形式的资源，等等。</p>
-<p>这时，有两种解决办法：</p>
-<p>1.使用绝对路径引用资源，在 Web 世界中就是资源的 URL</p>
-<p>2.使用相对路径引用资源</p>
-<h1 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h1><p>如果是使用相对路径引用资源，那么我们可以使用 Hexo 提供的资源文件夹功能。</p>
-<p>使用文本编辑器打开站点根目录下的 <code>_ config.yml</code> 文件，将 <code>post_asset_folder</code> 值设置为 <code>true</code>。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>上面的操作会开启 Hexo 的文章资源文件管理功能。Hexo 将会在我们每一次通过 <code>hexo new &lt;title&gt; </code>命令创建新文章时自动创建一个同名文件夹，于是我们便可以将文章所引用的相关资源放到这个同名文件夹下，然后通过相对路径引用。</p>
-<h1 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h1><p>通过常规的 <code>markdown</code> 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。我们可以通过使用 Hexo 提供的标签插件来解决这个问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
-<p>比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 <code>markdown</code> 语法<code> ![](/example.jpg)</code> ，它将 不会 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
-<p><strong>！！！注意</strong>： 如果已经开启了文章的资源文件夹功能，当使用 MarkDown 语法引用相对路径下的资源时，只需 .&#x2F;资源名称，不用在引用路径中添加同名文件夹目录层级。</p>
-<p>正确的引用图片方式是使用下列的标签插件而不是<code> markdown</code> ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img example.jpg This is an example image %&#125;</span><br></pre></td></tr></table></figure>
-<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
-<h1 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a>原文出处</h1><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://lfkid.github.io/2016/11/16/Hexo%E6%95%99%E7%A8%8B%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2/">https://lfkid.github.io/2016/11/16/Hexo%E6%95%99%E7%A8%8B%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2/</a></p>
+<h1 id="一、可支持配置模式"><a href="#一、可支持配置模式" class="headerlink" title="一、可支持配置模式"></a>一、可支持配置模式</h1><p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<h2 id="1、浮空输入"><a href="#1、浮空输入" class="headerlink" title="1、浮空输入"></a>1、浮空输入</h2><p><img src="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp"></p>
+<p>浮空输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。也就是说，I&#x2F;O的电平状态是不确定的，完全由外部输入决定；如果在该引脚悬空（在无信号输入）的情况下，读取该端口的电平是不确定的。所以在要读取外部信号时通常配置IO口为浮空输入模式。</p>
+<h2 id="2、上拉输入"><a href="#2、上拉输入" class="headerlink" title="2、上拉输入"></a>2、上拉输入</h2><p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc"></p>
+<p>上拉输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。但是在I&#x2F;O端口悬空（在无信号输入）的情况下，输入端的电平可以保持在高电平；并且在I&#x2F;O端口输入为低电平的时候，输入端的电平为低电平。</p>
+<h2 id="3、下拉输入"><a href="#3、下拉输入" class="headerlink" title="3、下拉输入"></a>3、下拉输入</h2><p><img src="https://114514.site/img/GPIO/IPD.jpg"></p>
+<p>下拉输入模式下，IO口工作方式刚好和上拉模式相反。I&#x2F;O端口的电平信号直接进入输入数据寄存器。但是在I&#x2F;O端口悬空（在无信号输入）的情况下，输入端的电平可以保持在低电平；并且在I&#x2F;O端口输入为高电平的时候，输入端为高电平。</p>
+<h2 id="4、模拟输入"><a href="#4、模拟输入" class="headerlink" title="4、模拟输入"></a>4、模拟输入</h2><p><img src="https://114514.site/img/GPIO/AIN.jpg"></p>
+<p>模拟输入模式下，I&#x2F;O端口的模拟信号（电压信号，而非电平信号）直接模拟输入到片上外设模块，比如ADC模块等等。</p>
+<h2 id="5、推挽输出"><a href="#5、推挽输出" class="headerlink" title="5、推挽输出"></a>5、推挽输出</h2><p>推挽又叫做推拉，是个很形象的名字。可以输出高,低电平,连接数字器件; 推挽结构一般是指两个三极管分别受两互补信号的控制,总是在一个三极管导通的时候另一个截止。推挽电路是两个参数相同的三极管或MOSFET,以推挽方式存在于电路中,各负责正负半周的波形放大任务,电路工作时，两只对称的功率开关管每次只有一个导通，所以导通损耗小、效率高。输出既可以向负载灌电流，也可以从负载抽取电流。推拉式输出级既提高电路的负载能力，又提高开关速度。<br><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911141933151?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<p>STM32中 I&#x2F;O端口位的基本结构：</p>
+<p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142035626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<p>在推挽输出模式时，<code>N-MOS</code>管和<code>P-MOS</code>管都工作，<em>如果我们控制输出为0，低电平</em>，则<code>P-MOS</code>管<strong>关闭</strong>，<code>N-MOS</code>管<strong>导通</strong>，使输出低电平，I&#x2F;O端口的电平就是低电平，<em>若控制输出为1 高电平</em>，则<code>P-MOS</code>管<strong>导通</strong><code>N-MOS</code>管<strong>关闭</strong>，使输出高电平，I&#x2F;O端口的电平就是高电。</p>
+<p>外部上拉和下拉的作用是控制在没有输出时IO口电平。</p>
+<p>此时施密特触发器是打开的，即输入可用，通过输入数据寄存器GPIOx_IDR可读取I&#x2F;O的实际状态。I&#x2F;O口的电平一定是输出的电平。 </p>
+<p>可以输出电流，也可以灌入电流。</p>
+<p>两个推挽输出不支持线与，会有短路风险。<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/as480133937/article/details/98063549">https://blog.csdn.net/as480133937/article/details/98063549</a></p>
+<h2 id="6、开漏输出"><a href="#6、开漏输出" class="headerlink" title="6、开漏输出"></a>6、开漏输出</h2><p>输出端相当于三极管的集电极. 要得到高电平状态需要上拉电阻才行. 适合于做电流型的驱动,其吸收电流的能力相对强(一般20ma以内)。</p>
+<p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142917813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<h3 id="6-1开漏的应用场景"><a href="#6-1开漏的应用场景" class="headerlink" title="6.1开漏的应用场景"></a>6.1开漏的应用场景</h3><ul>
+<li>利用外部电路的驱动能力，减少IC内部的驱动。当IC内部MOSFET导通时，驱动电流是从外部的VCC流经R pull-up ，MOSFET到GND。IC内部仅需很小的栅极驱动电流。</li>
+<li>一般来说，开漏是用来连接不同电平的器件，匹配电平用的，因为开漏引脚不连接外部的上拉电阻时，只能输出低电平，如果需要同时具备输出高电平的功能，则需要接上拉电阻，很好的一个优点是通过改变上拉电源的电压，便可以改变传输电平。比如加上上拉电阻就可以提供TTL&#x2F;CMOS电平输出(VCC&#x3D;3.3V、5V)等。（上拉电阻的阻值决定了逻辑电平转换的沿的速度 。阻值越大，速度越低功耗越小，所以负载电阻的选择要兼顾功耗和速度。）</li>
+<li>OPEN-DRAIN提供了灵活的输出方式，但是也有其弱点，就是带来上升沿的延时。因为上升沿是通过外接上拉无源电阻对负载充电，所以当电阻选择小时延时就小，但功耗大；反之延时大功耗小。所以如果对延时有要求，则建议用下降沿输出。</li>
+<li>可以将多个开漏输出的Pin，连接到一条线上。通过一只上拉电阻，在不增加任何器件的情况下，形成“与逻辑”关系。当多个引脚任意一个变低后，开漏线上的逻辑就为0了。这也是I2C，SMBus等总线判断总线占用状态的原理。</li>
+</ul>
+<h2 id="7、复用功能的推挽（开漏）输出"><a href="#7、复用功能的推挽（开漏）输出" class="headerlink" title="7、复用功能的推挽（开漏）输出"></a>7、复用功能的推挽（开漏）输出</h2><p>_AF_PP ——片内外设功能（I2C的SCL,SDA）</p>
+<p>_AF_OD——片内外设功能（TX1,MOSI,MISO.SCK.SS）</p>
 
       
       
       
-      <div class="declare" hidden="hidden"></div>
+        <div class="declare">
+          <strong>本文作者：</strong>
+        
+          vv_vda
+        
+        <br>
+        <strong>本文链接：</strong>
+        https://dnoagain.github.io/2022/03/31/STM32-GPIO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/
+        <br>
+        <strong>版权声明：</strong>
+        本作品采用
+        <a rel="external nofollow noopener noreferrer" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。转载请注明出处！
+        
+          <br>
+          <a rel="external nofollow noopener noreferrer" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+        
+      </div>
     
 
       
@@ -276,11 +298,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">STM32F103</a>
         		</li>
       		
 		</ul>
@@ -292,11 +310,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/博客//" class="article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/博客/写作//" class="article-tag-list-link color3">写作</a>
+        			<a href="/categories/STM32F103//" class="article-tag-list-link color5">STM32F103</a>
         		</li>
       		
 		</ul>
@@ -314,15 +328,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/03/27/STM32-OV7670/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          STM32 &amp; OV7670
-        
-      </div>
-    </a>
   
+    <a href="/2022/03/27/STM32%E9%80%9A%E7%94%A8%E5%AE%9A%E6%97%B6%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32通用定时器</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -347,7 +357,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">新建文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">文档格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">文章分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%B5%84%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">引用资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">5.</span> <span class="toc-text">文章资源文件夹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE%E6%8F%92%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">相对路径引用的标签插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E6%96%87%E5%87%BA%E5%A4%84"><span class="toc-number">7.</span> <span class="toc-text">原文出处</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8F%AF%E6%94%AF%E6%8C%81%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">一、可支持配置模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%B5%AE%E7%A9%BA%E8%BE%93%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">1、浮空输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E4%B8%8A%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">2、上拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%B8%8B%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">3、下拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">4、模拟输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">5、推挽输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-number">1.6.</span> <span class="toc-text">6、开漏输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%BC%80%E6%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1开漏的应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%A4%8D%E7%94%A8%E5%8A%9F%E8%83%BD%E7%9A%84%E6%8E%A8%E6%8C%BD%EF%BC%88%E5%BC%80%E6%BC%8F%EF%BC%89%E8%BE%93%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text">7、复用功能的推挽（开漏）输出</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
