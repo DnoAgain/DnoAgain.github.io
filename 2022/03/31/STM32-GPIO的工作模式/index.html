@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142035626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142917813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="article:published_time" content="2022-03-31T01:27:27.000Z">
-<meta property="article:modified_time" content="2022-03-31T08:09:36.371Z">
+<meta property="article:modified_time" content="2022-03-31T08:18:26.807Z">
 <meta property="article:author" content="vv_vda">
 <meta property="article:tag" content="STM32F103">
 <meta name="twitter:card" content="summary">
@@ -210,33 +210,35 @@
         <p>简介</p>
 <p>GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。</p>
 <span id="more"></span>
-<h1 id="一、可支持配置模式"><a href="#一、可支持配置模式" class="headerlink" title="一、可支持配置模式"></a>一、可支持配置模式</h1><p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
-<h2 id="1、浮空输入"><a href="#1、浮空输入" class="headerlink" title="1、浮空输入"></a>1、浮空输入</h2><p><img src="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp"></p>
+<h1 id="可支持配置模式"><a href="#可支持配置模式" class="headerlink" title="可支持配置模式"></a>可支持配置模式</h1><p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<h2 id="浮空输入"><a href="#浮空输入" class="headerlink" title="浮空输入"></a>浮空输入</h2><p><img src="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp"></p>
 <p>浮空输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。也就是说，I&#x2F;O的电平状态是不确定的，完全由外部输入决定；如果在该引脚悬空（在无信号输入）的情况下，读取该端口的电平是不确定的。所以在要读取外部信号时通常配置IO口为浮空输入模式。</p>
-<h2 id="2、上拉输入"><a href="#2、上拉输入" class="headerlink" title="2、上拉输入"></a>2、上拉输入</h2><p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc"></p>
+<h2 id="上拉输入"><a href="#上拉输入" class="headerlink" title="上拉输入"></a>上拉输入</h2><p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc"></p>
 <p>上拉输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。但是在I&#x2F;O端口悬空（在无信号输入）的情况下，输入端的电平可以保持在高电平；并且在I&#x2F;O端口输入为低电平的时候，输入端的电平为低电平。</p>
-<h2 id="3、下拉输入"><a href="#3、下拉输入" class="headerlink" title="3、下拉输入"></a>3、下拉输入</h2><p><img src="https://114514.site/img/GPIO/IPD.jpg"></p>
+<h2 id="下拉输入"><a href="#下拉输入" class="headerlink" title="下拉输入"></a>下拉输入</h2><p><img src="https://114514.site/img/GPIO/IPD.jpg"></p>
 <p>下拉输入模式下，IO口工作方式刚好和上拉模式相反。I&#x2F;O端口的电平信号直接进入输入数据寄存器。但是在I&#x2F;O端口悬空（在无信号输入）的情况下，输入端的电平可以保持在低电平；并且在I&#x2F;O端口输入为高电平的时候，输入端为高电平。</p>
-<h2 id="4、模拟输入"><a href="#4、模拟输入" class="headerlink" title="4、模拟输入"></a>4、模拟输入</h2><p><img src="https://114514.site/img/GPIO/AIN.jpg"></p>
+<h2 id="模拟输入"><a href="#模拟输入" class="headerlink" title="模拟输入"></a>模拟输入</h2><p><img src="https://114514.site/img/GPIO/AIN.jpg"></p>
 <p>模拟输入模式下，I&#x2F;O端口的模拟信号（电压信号，而非电平信号）直接模拟输入到片上外设模块，比如ADC模块等等。</p>
-<h2 id="5、推挽输出"><a href="#5、推挽输出" class="headerlink" title="5、推挽输出"></a>5、推挽输出</h2><p>推挽又叫做推拉，是个很形象的名字。可以输出高,低电平,连接数字器件; 推挽结构一般是指两个三极管分别受两互补信号的控制,总是在一个三极管导通的时候另一个截止。推挽电路是两个参数相同的三极管或MOSFET,以推挽方式存在于电路中,各负责正负半周的波形放大任务,电路工作时，两只对称的功率开关管每次只有一个导通，所以导通损耗小、效率高。输出既可以向负载灌电流，也可以从负载抽取电流。推拉式输出级既提高电路的负载能力，又提高开关速度。<br><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911141933151?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
+<h2 id="推挽输出"><a href="#推挽输出" class="headerlink" title="推挽输出"></a>推挽输出</h2><p>推挽又叫做推拉，是个很形象的名字。可以输出高,低电平,连接数字器件; 推挽结构一般是指两个三极管分别受两互补信号的控制,总是在一个三极管导通的时候另一个截止。推挽电路是两个参数相同的三极管或MOSFET,以推挽方式存在于电路中,各负责正负半周的波形放大任务,电路工作时，两只对称的功率开关管每次只有一个导通，所以导通损耗小、效率高。输出既可以向负载灌电流，也可以从负载抽取电流。推拉式输出级既提高电路的负载能力，又提高开关速度。<br><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911141933151?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
 <p>STM32中 I&#x2F;O端口位的基本结构：</p>
 <p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142035626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
 <p>在推挽输出模式时，<code>N-MOS</code>管和<code>P-MOS</code>管都工作，<em>如果我们控制输出为0，低电平</em>，则<code>P-MOS</code>管<strong>关闭</strong>，<code>N-MOS</code>管<strong>导通</strong>，使输出低电平，I&#x2F;O端口的电平就是低电平，<em>若控制输出为1 高电平</em>，则<code>P-MOS</code>管<strong>导通</strong><code>N-MOS</code>管<strong>关闭</strong>，使输出高电平，I&#x2F;O端口的电平就是高电。</p>
 <p>外部上拉和下拉的作用是控制在没有输出时IO口电平。</p>
 <p>此时施密特触发器是打开的，即输入可用，通过输入数据寄存器GPIOx_IDR可读取I&#x2F;O的实际状态。I&#x2F;O口的电平一定是输出的电平。 </p>
 <p>可以输出电流，也可以灌入电流。</p>
-<p>两个推挽输出不支持线与，会有短路风险。<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/as480133937/article/details/98063549">https://blog.csdn.net/as480133937/article/details/98063549</a></p>
-<h2 id="6、开漏输出"><a href="#6、开漏输出" class="headerlink" title="6、开漏输出"></a>6、开漏输出</h2><p>输出端相当于三极管的集电极. 要得到高电平状态需要上拉电阻才行. 适合于做电流型的驱动,其吸收电流的能力相对强(一般20ma以内)。</p>
+<p>两个推挽输出不支持线与，会有短路风险。</p>
+<h2 id="开漏输出"><a href="#开漏输出" class="headerlink" title="开漏输出"></a>开漏输出</h2><p>输出端相当于三极管的集电极. 要得到高电平状态需要上拉电阻才行. 适合于做电流型的驱动,其吸收电流的能力相对强(一般20ma以内)。</p>
 <p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142917813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
-<h3 id="6-1开漏的应用场景"><a href="#6-1开漏的应用场景" class="headerlink" title="6.1开漏的应用场景"></a>6.1开漏的应用场景</h3><ul>
+<h3 id="开漏的应用场景"><a href="#开漏的应用场景" class="headerlink" title="开漏的应用场景"></a>开漏的应用场景</h3><ul>
 <li>利用外部电路的驱动能力，减少IC内部的驱动。当IC内部MOSFET导通时，驱动电流是从外部的VCC流经R pull-up ，MOSFET到GND。IC内部仅需很小的栅极驱动电流。</li>
 <li>一般来说，开漏是用来连接不同电平的器件，匹配电平用的，因为开漏引脚不连接外部的上拉电阻时，只能输出低电平，如果需要同时具备输出高电平的功能，则需要接上拉电阻，很好的一个优点是通过改变上拉电源的电压，便可以改变传输电平。比如加上上拉电阻就可以提供TTL&#x2F;CMOS电平输出(VCC&#x3D;3.3V、5V)等。（上拉电阻的阻值决定了逻辑电平转换的沿的速度 。阻值越大，速度越低功耗越小，所以负载电阻的选择要兼顾功耗和速度。）</li>
 <li>OPEN-DRAIN提供了灵活的输出方式，但是也有其弱点，就是带来上升沿的延时。因为上升沿是通过外接上拉无源电阻对负载充电，所以当电阻选择小时延时就小，但功耗大；反之延时大功耗小。所以如果对延时有要求，则建议用下降沿输出。</li>
 <li>可以将多个开漏输出的Pin，连接到一条线上。通过一只上拉电阻，在不增加任何器件的情况下，形成“与逻辑”关系。当多个引脚任意一个变低后，开漏线上的逻辑就为0了。这也是I2C，SMBus等总线判断总线占用状态的原理。</li>
 </ul>
-<h2 id="7、复用功能的推挽（开漏）输出"><a href="#7、复用功能的推挽（开漏）输出" class="headerlink" title="7、复用功能的推挽（开漏）输出"></a>7、复用功能的推挽（开漏）输出</h2><p>_AF_PP ——片内外设功能（I2C的SCL,SDA）</p>
+<h2 id="复用功能的推挽（开漏）输出"><a href="#复用功能的推挽（开漏）输出" class="headerlink" title="复用功能的推挽（开漏）输出"></a>复用功能的推挽（开漏）输出</h2><p>_AF_PP ——片内外设功能（I2C的SCL,SDA）</p>
 <p>_AF_OD——片内外设功能（TX1,MOSI,MISO.SCK.SS）</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/qq_27870421/article/details/86541868">推挽与开漏输出详解</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://codeantenna.com/a/fxIe2FCsIv">STM32中GPIO的8种工作模式</a></p>
 
       
       
@@ -357,7 +359,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8F%AF%E6%94%AF%E6%8C%81%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">一、可支持配置模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%B5%AE%E7%A9%BA%E8%BE%93%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">1、浮空输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E4%B8%8A%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">2、上拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%B8%8B%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">3、下拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">4、模拟输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">5、推挽输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-number">1.6.</span> <span class="toc-text">6、开漏输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%BC%80%E6%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1开漏的应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%A4%8D%E7%94%A8%E5%8A%9F%E8%83%BD%E7%9A%84%E6%8E%A8%E6%8C%BD%EF%BC%88%E5%BC%80%E6%BC%8F%EF%BC%89%E8%BE%93%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text">7、复用功能的推挽（开漏）输出</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E6%94%AF%E6%8C%81%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">可支持配置模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%A9%BA%E8%BE%93%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">浮空输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">上拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E8%BE%93%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">下拉输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">模拟输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">推挽输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA"><span class="toc-number">1.6.</span> <span class="toc-text">开漏输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">开漏的应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E5%8A%9F%E8%83%BD%E7%9A%84%E6%8E%A8%E6%8C%BD%EF%BC%88%E5%BC%80%E6%BC%8F%EF%BC%89%E8%BE%93%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text">复用功能的推挽（开漏）输出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
                     </div>
                 </span>
             </div>
