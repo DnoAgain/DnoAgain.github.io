@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20201116191359.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20201116204840.png">
 <meta property="article:published_time" content="2022-04-01T05:41:16.000Z">
-<meta property="article:modified_time" content="2022-04-01T13:30:26.009Z">
+<meta property="article:modified_time" content="2022-04-01T13:38:41.626Z">
 <meta property="article:author" content="vv_vda">
 <meta property="article:tag" content="STM32F103">
 <meta name="twitter:card" content="summary">
@@ -240,30 +240,24 @@
 </blockquote>
 <h2 id="常用时钟"><a href="#常用时钟" class="headerlink" title="常用时钟"></a>常用时钟</h2><p>A~G 为我们常用的时钟，5 个主要的时钟来源为他们提供信号，其中：</p>
 <ul>
-<li><p>A 为这里是看门狗时钟输入。看门狗时钟源只能是低速的 LSI 时钟。</p>
-</li>
-<li><p>B 为 RTC 时钟源，从图上可以看出，RTC 的时钟源可以选择 LSI，LSE，以及 HSE 分频后的时钟，HSE 分频系数为 2~31</p>
-</li>
-<li><p>C 为输出时钟 MCO1 和 MCO2。</p>
-<ul>
+<li>A 为这里是看门狗时钟输入。看门狗时钟源只能是低速的 LSI 时钟。</li>
+<li>B 为 RTC 时钟源，从图上可以看出，RTC 的时钟源可以选择 LSI，LSE，以及 HSE 分频后的时钟，HSE 分频系数为 2~31</li>
+<li>C 为输出时钟 MCO1 和 MCO2。<ul>
 <li>MCO1 是向芯片的 PA8 引脚输出时钟。它有四个时钟来源分别为：HSI, LSE, HSE 和 PLL 时钟。</li>
 <li>MCO2 是向芯片的 PC9 输出时钟，它同样有四个时钟来源分别为：输出时钟，它同样有四个时钟来源分别为：HSE, PLL，SYSCLK 以及以及 PLLI2S 时钟。MCO 时钟输出时钟频率最大不超过 100MHz</li>
 </ul>
 </li>
-<li><p>D 为系统时钟。从图中可以看出，SYSCLK 系统时钟来源有三个方面：HSI, HSE 和 PLL。在我们实际应用中，因为对时钟速度要求都比较高我们才会选用 STM32F4 这种级别的处理器，所以一般情况下，都是采用 PLL 作为 SYSCLK 时钟源。根据前面的计算公式，就可以算出系统的 SYSCLK 是多少。</p>
-</li>
-<li><p>E 中：这里我们指的是以太网 PTP 时钟，AHB 时钟，APB2 高速时钟，APB1 低速时钟。其中以太网 PTP 时钟是使用系统时钟。其中 。其中有很多 xCLK 容易让我们迷惑，下面就分清他们：</p>
-<ul>
-<li>HCLK：系统时钟 SYSCLK 经过 AHB 分频器(AHB Prescaler) 处理之后得到的时钟频率，不管是看上面的大图还是 CubeMX 上的时钟树图，都可以看到后面的 - - APBx 分频、直接输出到 Cortex 内核的定时器时钟频率都来源于这个 HCLK，其最大时钟为 168MHz</li>
+<li>D 为系统时钟。从图中可以看出，SYSCLK 系统时钟来源有三个方面：HSI, HSE 和 PLL。在我们实际应用中，因为对时钟速度要求都比较高我们才会选用 STM32F4 这种级别的处理器，所以一般情况下，都是采用 PLL 作为 SYSCLK 时钟源。根据前面的计算公式，就可以算出系统的 SYSCLK 是多少。</li>
+<li>E 中：这里我们指的是以太网 PTP 时钟，AHB 时钟，APB2 高速时钟，APB1 低速时钟。其中以太网 PTP 时钟是使用系统时钟。其中 。其中有很多 xCLK 容易让我们迷惑，下面就分清他们：<ul>
+<li>HCLK：系统时钟 SYSCLK 经过 AHB 分频器(AHB Prescaler) 处理之后得到的时钟频率，不管是看上面的大图还是 CubeMX 上的时钟树图，都可以看到后面的 </li>
+<li>APBx 分频、直接输出到 Cortex 内核的定时器时钟频率都来源于这个 HCLK，其最大时钟为 168MHz</li>
 <li>PCLKx：在 HCLK 时钟频率输出之后，APBx 分频器(APBx Prescaler) 处理后得到的时钟频率为 PCLKx (x &#x3D; 1 或 2)，这个时钟频率将直接为挂载在 APBx 总线上的外设提供时钟。而再次经过一个 APBx 倍频系数后才为 APBx 总线上的时钟频率。其中 AHB , APB2 高速时钟最大频率为 84MHz，而 APB1 低速时钟最大频率为 42MHz</li>
 <li>FCLK：Cortex 自出运行时钟频率</li>
 <li>乘以倍频系数：分频系数 1 或 8 可以得到 Cortex 系统定时器运行的频率，这个定时器也就是滴答定时器的其中一个时钟源，顺便提一下，在 HAL 中，系统自动生成的代码工程中，滴答定时器的中断为 1ms 一次。但是关于 HAL 对滴答定时器的 bug 可以参考<a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/ybhuangfugui/article/details/88840329">这篇文章</a>，滴答定时器的时钟源只是 HCLK 而已（好像是这样）</li>
 </ul>
 </li>
-<li><p>F 为 I2S 时钟源。从图中可以看出，I2S 的时钟源来源于 PLLI2S 或者映射到 I2S_CKIN 引脚的外部时钟。 I2S 出于音质的考虑，对时钟精度要求很高</p>
-</li>
-<li><p>G 为 STM32 内部以太网 MAC 时钟的来源。对于 MII 接口来说，必须向外部 PHY 芯片提供 25MHz 的时钟，这个时钟，可以由 PHY 芯片外接晶振，或者使用 STM32F4 的 MCO 输出来提供。然后，PHY 芯片再给 STM32F4 提供 ETH_MII_TX_CLK 和 ETH_MII_RX_CLK 时钟。对于 RMII 接口来说，外部必须提供 50MHz 的时钟驱动 PHY 和 STM32F4 的 ETH_RMII_REF_CLK，这个 50MHz 时钟可以来自 PHY、有源晶振或者 STM32F4 的 MCO。我们的开发板使用的是 RMII 接口，使用 PHY 芯片提供 50MHz 时钟驱动 STM32F4 的 ETH_RMII_REF_CLK。</p>
-</li>
+<li>F 为 I2S 时钟源。从图中可以看出，I2S 的时钟源来源于 PLLI2S 或者映射到 I2S_CKIN 引脚的外部时钟。 I2S 出于音质的考虑，对时钟精度要求很高</li>
+<li>G 为 STM32 内部以太网 MAC 时钟的来源。对于 MII 接口来说，必须向外部 PHY 芯片提供 25MHz 的时钟，这个时钟，可以由 PHY 芯片外接晶振，或者使用 STM32F4 的 MCO 输出来提供。然后，PHY 芯片再给 STM32F4 提供 ETH_MII_TX_CLK 和 ETH_MII_RX_CLK 时钟。对于 RMII 接口来说，外部必须提供 50MHz 的时钟驱动 PHY 和 STM32F4 的 ETH_RMII_REF_CLK，这个 50MHz 时钟可以来自 PHY、有源晶振或者 STM32F4 的 MCO。我们的开发板使用的是 RMII 接口，使用 PHY 芯片提供 50MHz 时钟驱动 STM32F4 的 ETH_RMII_REF_CLK。</li>
 </ul>
 <h1 id="HAL库设置时钟"><a href="#HAL库设置时钟" class="headerlink" title="HAL库设置时钟"></a>HAL库设置时钟</h1><hr>
 <p>HAL 库中系统初始化并没有设置时钟的相关设置，所以我们必须要自行设置时钟。虽然可以通过 CubeMX 初始化时钟设置，但是知道这种方法也很重要。</p>
@@ -615,15 +609,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">通用定时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">通用定时器</a>
               </li>
             
             <div class="clearfix"></div>
