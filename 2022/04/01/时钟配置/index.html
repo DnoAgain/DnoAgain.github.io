@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://DnoAgain.github.io">
   <title>时钟配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="时钟树 基于 F4 系列分析  这是 STM32 的时钟树：         STM32 的时钟来源主要有5个：HSI、HSE、LSI、LSE、PLL，它们究竟是什么请参考之前写过的这个，其中 PLL 分为主 PLL 与 专用 PLL，它也被列为高速时钟。 计算分析PLL分析PLL 为锁相环倍频 输出。F4 系列有两个 PLL:  主 PLL(PLL)由 HSE 或者 HSI 提供时钟信号，并">
+  <meta name="description" content="SysTick时钟源是来自哪里? 这个问题只要认真看参考手册都能找到答案。 RCC通过AHB时钟(HCLK)8分频后作为Cortex系统定时器(SysTick)的外部时钟。通过对SysTick控制与状态寄存器的设置，可选择上述时钟或Cortex(HCLK)时钟作为SysTick时钟。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时钟配置">
 <meta property="og:url" content="https://dnoagain.github.io/2022/04/01/%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="时钟树 基于 F4 系列分析  这是 STM32 的时钟树：         STM32 的时钟来源主要有5个：HSI、HSE、LSI、LSE、PLL，它们究竟是什么请参考之前写过的这个，其中 PLL 分为主 PLL 与 专用 PLL，它也被列为高速时钟。 计算分析PLL分析PLL 为锁相环倍频 输出。F4 系列有两个 PLL:  主 PLL(PLL)由 HSE 或者 HSI 提供时钟信号，并">
+<meta property="og:description" content="SysTick时钟源是来自哪里? 这个问题只要认真看参考手册都能找到答案。 RCC通过AHB时钟(HCLK)8分频后作为Cortex系统定时器(SysTick)的外部时钟。通过对SysTick控制与状态寄存器的设置，可选择上述时钟或Cortex(HCLK)时钟作为SysTick时钟。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20201116190251.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20201116191359.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20201116204840.png">
 <meta property="article:published_time" content="2022-04-01T05:41:16.000Z">
-<meta property="article:modified_time" content="2022-04-01T08:36:56.086Z">
+<meta property="article:modified_time" content="2022-04-01T08:41:50.144Z">
 <meta property="article:author" content="vv_vda">
 <meta property="article:tag" content="STM32F103">
 <meta name="twitter:card" content="summary">
@@ -183,7 +183,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.8k字</span>
+        <span class="post-count">2.9k字</span>
       </span>
     </span>
 
@@ -202,7 +202,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
+        <p>SysTick时钟源是来自哪里?</p>
+<p>这个问题只要认真看参考手册都能找到答案。</p>
+<p>RCC通过AHB时钟(HCLK)8分频后作为Cortex系统定时器(SysTick)的外部时钟。通过对SysTick控制与状态寄存器的设置，可选择上述时钟或Cortex(HCLK)时钟作为SysTick时钟。</p>
+<span id="more"></span>
 
 <h1 id="时钟树"><a href="#时钟树" class="headerlink" title="时钟树"></a>时钟树</h1><blockquote>
 <p>基于 F4 系列分析</p>
