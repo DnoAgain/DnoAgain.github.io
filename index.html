@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 5
+			总文章数 6
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -155,6 +155,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-滴答定时器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/05/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/">滴答定时器</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/05/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2022-04-05T09:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-05</time>
+</a>
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+          
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SysTick 是一个 24 位定时器，属于 Cortex内核中的一个外设，类似 NVIC。用于提供时间基准，多为操作系统所使用，常用于对时间要求严格的情况。SysTick 的输入源可以是 HCLK 或者 HCLK 分频8倍</p>
+        
+      
+      
+      
+      <div class="declare" hidden="hidden"></div>
+    
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">STM32F103</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/STM32F103//" class="article-tag-list-link color5">STM32F103</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/05/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-时钟配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,7 +293,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.9k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -195,9 +312,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>SysTick时钟源是来自哪里?</p>
-<p>这个问题只要认真看参考手册都能找到答案。</p>
-<p>RCC通过AHB时钟(HCLK)8分频后作为Cortex系统定时器(SysTick)的外部时钟。通过对SysTick控制与状态寄存器的设置，可选择上述时钟或Cortex(HCLK)时钟作为SysTick时钟。</p>
+        <p>AHB分频因子（决定HCLK）、APB2分频因子（决定PCLK2）、APB1分频因子（决定PCLK2）如何设置从而控制AHB、PCLK2、PCLK1三条总线。</p>
         
       
       

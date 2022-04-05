@@ -16,7 +16,7 @@
 <meta property="og:description" content="简介 GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:image" content="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20200820202629.png">
 <meta property="og:image" content="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc">
 <meta property="og:image" content="https://114514.site/img/GPIO/IPD.jpg">
 <meta property="og:image" content="https://114514.site/img/GPIO/AIN.jpg">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142035626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="https://codeantenna.com/image/https://img-blog.csdn.net/20160911142917813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="article:published_time" content="2022-03-31T01:27:27.000Z">
-<meta property="article:modified_time" content="2022-04-01T06:02:42.978Z">
+<meta property="article:modified_time" content="2022-04-04T12:51:11.462Z">
 <meta property="article:author" content="vv_vda">
 <meta property="article:tag" content="STM32F103">
 <meta name="twitter:card" content="summary">
@@ -76,7 +76,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 5
+			总文章数 6
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -211,7 +211,7 @@
 <p>GPIO,即通用I&#x2F;O(输入&#x2F;输出)端口，是STM32可控制的引脚。有四种输入模式以及四种输出模式。</p>
 <span id="more"></span>
 <h1 id="可支持配置模式"><a href="#可支持配置模式" class="headerlink" title="可支持配置模式"></a>可支持配置模式</h1><p><img src="https://codeantenna.com/image/https://img-blog.csdn.net/20160911130819796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p>
-<h2 id="浮空输入"><a href="#浮空输入" class="headerlink" title="浮空输入"></a>浮空输入</h2><p><img src="https://i0.hdslb.com/bfs/article/4a15a16b2cfe3dcc05ace5d7a193e14cfa0d8f05.jpg@942w_537h_progressive.webp"></p>
+<h2 id="浮空输入"><a href="#浮空输入" class="headerlink" title="浮空输入"></a>浮空输入</h2><p><img src="https://cdn.jsdelivr.net/gh/CHANShu0508/images_shack/images/20200820202629.png"></p>
 <p>浮空输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。也就是说，I&#x2F;O的电平状态是不确定的，完全由外部输入决定；如果在该引脚悬空（在无信号输入）的情况下，读取该端口的电平是不确定的。所以在要读取外部信号时通常配置IO口为浮空输入模式。</p>
 <h2 id="上拉输入"><a href="#上拉输入" class="headerlink" title="上拉输入"></a>上拉输入</h2><p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTGnX4x-98p80ACzPWwlbBzNBdSo1l7elV-zeZ1MTMa4JJGsLXc"></p>
 <p>上拉输入模式下，I&#x2F;O端口的电平信号直接进入输入数据寄存器。但是在I&#x2F;O端口悬空（在无信号输入）的情况下，输入端的电平可以保持在高电平；并且在I&#x2F;O端口输入为低电平的时候，输入端的电平为低电平。</p>
